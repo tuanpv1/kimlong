@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: tvod2
+-- Host: 45.32.112.173    Database: bds
 -- ------------------------------------------------------
--- Server version	5.5.40-0ubuntu0.14.04.1
+-- Server version	5.6.41
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,11 +16,8 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ads`
+-- Table structure for table `auth_assignment`
 --
-
-
-
 
 DROP TABLE IF EXISTS `auth_assignment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -36,15 +33,6 @@ CREATE TABLE `auth_assignment` (
   CONSTRAINT `fk_auth_assignment_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_assignment`
---
-
-LOCK TABLES `auth_assignment` WRITE;
-/*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `auth_item`
@@ -70,15 +58,6 @@ CREATE TABLE `auth_item` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth_item`
---
-
-LOCK TABLES `auth_item` WRITE;
-/*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_item` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `auth_item_child`
 --
 
@@ -94,15 +73,6 @@ CREATE TABLE `auth_item_child` (
   CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_item_child`
---
-
-LOCK TABLES `auth_item_child` WRITE;
-/*!40000 ALTER TABLE `auth_item_child` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_item_child` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `auth_rule`
@@ -121,193 +91,123 @@ CREATE TABLE `auth_rule` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth_rule`
+-- Table structure for table `info_public`
 --
 
-LOCK TABLES `auth_rule` WRITE;
-/*!40000 ALTER TABLE `auth_rule` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_rule` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `category`
---
-
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `info_public`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
+CREATE TABLE `info_public` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `display_name` varchar(200) NOT NULL,
-  `ascii_name` varchar(200) DEFAULT NULL,
-  `description` text,
-  `status` int(11) NOT NULL DEFAULT '1' COMMENT '10 - active\n0 - inactive\n3 - for test only',
-  `order_number` int(11) NOT NULL DEFAULT '0' COMMENT 'dung de sap xep category theo thu tu xac dinh, order chi dc so sanh khi cac category co cung level',
-  `parent_id` int(11) DEFAULT NULL,
-  `path` varchar(200) DEFAULT NULL COMMENT 'chua duong dan tu root den node nay trong category tree, vi du: 1/3/18/4, voi 4 la id cua category hien tai',
-  `level` int(11) DEFAULT NULL COMMENT '0 - root\n1 - category cap 2\n2 - category cap 3\n...',
-  `child_count` int(11) DEFAULT NULL,
-  `images` varchar(500) DEFAULT NULL,
+  `image_header` varchar(255) DEFAULT NULL,
+  `image_footer` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `link_face` varchar(255) DEFAULT NULL,
+  `google` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_vod_category_vod_category_idx` (`parent_id`),
-  KEY `idx_name` (`display_name`),
-  KEY `idx_name_ascii` (`ascii_name`),
-  KEY `idx_desc` (`description`(255)),
-  KEY `idx_order_no` (`order_number`),
-  KEY `idx_parent_id` (`parent_id`),
-  KEY `idx_path` (`path`),
-  KEY `idx_level` (`level`),
-  CONSTRAINT `fk_vod_category_vod_category` FOREIGN KEY (`parent_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `youtube` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
+  `convert_price_vnd` int(11) DEFAULT NULL,
+  `time_show_order` int(11) DEFAULT '0',
+  `max_price_search` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Table structure for table `migration`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `content`
---
-
-DROP TABLE IF EXISTS `content`;
+DROP TABLE IF EXISTS `migration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content` (
+CREATE TABLE `migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `display_name` varchar(200) NOT NULL,
-  `code` varchar(20) NOT NULL COMMENT 'ma de mua noi dung (qua SMS)',
-  `ascii_name` varchar(200) DEFAULT NULL COMMENT 'string khong dau cua display_name',
-  `type` smallint(6) NOT NULL DEFAULT '1' COMMENT '1 - video\n2 - live\n3 - music\n4 - news\n11 - music\n12 - clip\n13 - radio\n14 - karaoke\n15 - live programm (recorded)\n21 - near live\n100 - app\n',
-  `tags` varchar(500) DEFAULT NULL,
+  `display_name` varchar(500) DEFAULT NULL,
   `short_description` varchar(500) DEFAULT NULL,
   `description` text,
-  `content` text COMMENT 'HTML content',
-  `version_code` int(11) DEFAULT NULL,
-  `version` varchar(64) DEFAULT NULL,
-  `view_count` int(11) NOT NULL DEFAULT '0',
-  `download_count` int(11) DEFAULT '0',
-  `like_count` int(11) NOT NULL DEFAULT '0',
-  `dislike_count` int(11) NOT NULL DEFAULT '0',
-  `rating` double(11,2) NOT NULL DEFAULT '0.00',
-  `rating_count` int(11) NOT NULL DEFAULT '0',
-  `comment_count` int(11) NOT NULL DEFAULT '0',
-  `favorite_count` int(11) NOT NULL DEFAULT '0',
-  `images` text COMMENT 'danh sach cac images, json encoded\n',
-  `status` int(11) NOT NULL DEFAULT '10' COMMENT '0 - pending\n10 - active\n1 - waiting for trancoding\n2 - inactive\n3 - for test only\n4 - rejected vi nguyen nhan 1\n5 - rejected vi nguyen nhan 2\n6 - rejected vi nguyen nhan 3\n...',
+  `image_display` text,
+  `content` text,
+  `type` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
-  `honor` int(11) DEFAULT '0' COMMENT '0 --> nothing\n1 --> featured\n2 --> hot\n3 --> especial',
-  `approved_at` int(11) DEFAULT NULL,
-  `order` int(11) DEFAULT '0',
-  `price` int(11) DEFAULT '0',
-  `price_promotion` int(11) DEFAULT NULL,
-  `highlight` text,
-  `condition` text,
-  `expired_at` int(11) DEFAULT '1' COMMENT 'so ngay download ke tu khi mua ',
-  `address` varchar(500) DEFAULT NULL,
-  `title_short` varchar(500) DEFAULT NULL,
-  `country` varchar(200) DEFAULT NULL,
-  `language` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code_UNIQUE` (`code`),
-  KEY `idx_name` (`display_name`),
-  KEY `idx_tags` (`tags`(255)),
-  KEY `idx_short_desc` (`short_description`(255)),
-  KEY `idx_desc` (`description`(255)),
-  KEY `idx_view_count` (`view_count`),
-  KEY `idx_like_count` (`like_count`),
-  KEY `idx_dislike_count` (`dislike_count`),
-  KEY `idx_rating` (`rating`),
-  KEY `idx_rating_count` (`rating_count`),
-  KEY `idx_comment_count` (`comment_count`),
-  KEY `idx_favorite_count` (`favorite_count`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='TODO: thong tin ve cac thuoc tinh nhu dao dien, tac gia, ca ';
+  `created_user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `content`
+-- Table structure for table `slide`
 --
 
-LOCK TABLES `content` WRITE;
-/*!40000 ALTER TABLE `content` DISABLE KEYS */;
-/*!40000 ALTER TABLE `content` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `content_attribute`
---
-
-
---
--- Table structure for table `content_attribute_value`
---
-
-
-
-DROP TABLE IF EXISTS `content_category_asm`;
+DROP TABLE IF EXISTS `slide`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content_category_asm` (
+CREATE TABLE `slide` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `content_category_asm`
---
-
-LOCK TABLES `content_category_asm` WRITE;
-/*!40000 ALTER TABLE `content_category_asm` DISABLE KEYS */;
-/*!40000 ALTER TABLE `content_category_asm` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `content_feedback`
---
-
-
-
-
-DROP TABLE IF EXISTS `site_api_credential`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `site_api_credential` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `client_name` varchar(200) NOT NULL,
-  `type` smallint(6) NOT NULL DEFAULT '1' COMMENT '1 - web client (can co secret key cho server va apikey)\n2 - android client (can co api key, packagename va certificate fingerprint\n3 - ios\n4 - windows phone',
-  `client_api_key` varchar(128) NOT NULL COMMENT 'dung cho tat cac moi client',
-  `client_secret` varchar(128) DEFAULT NULL COMMENT 'dung cho web, ios, windows',
-  `description` varchar(1024) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '10' COMMENT '10 - active, \n0 - suspended, \n...',
+  `content_id` int(11) DEFAULT NULL,
+  `des` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `site_api_credential`
+-- Table structure for table `subscriber`
 --
 
-LOCK TABLES `site_api_credential` WRITE;
-/*!40000 ALTER TABLE `site_api_credential` DISABLE KEYS */;
-/*!40000 ALTER TABLE `site_api_credential` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `subscriber`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subscriber` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `gender` int(3) DEFAULT NULL,
+  `status` int(3) DEFAULT NULL,
+  `auth_key` varchar(32) DEFAULT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `password_reset_token` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `id_facebook` int(11) DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
+  `about` varchar(600) DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `password_reset_token` (`password_reset_token`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-
-
+--
+-- Table structure for table `user`
+--
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -330,18 +230,14 @@ CREATE TABLE `user` (
   `user_ref_id` int(11) DEFAULT NULL,
   `access_login_token` varchar(255) DEFAULT NULL,
   `phone_number` varchar(200) DEFAULT NULL,
+  `address` varchar(500) DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
+  `gender` int(3) DEFAULT NULL,
+  `about` varchar(500) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='quan ly cac site (tvod viet nam, tvod nga, tvod sec...)';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user_activity`
@@ -372,15 +268,6 @@ CREATE TABLE `user_activity` (
   CONSTRAINT `fk_user_activity_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_activity`
---
-
-LOCK TABLES `user_activity` WRITE;
-/*!40000 ALTER TABLE `user_activity` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_activity` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -391,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-04  9:11:39
+-- Dump completed on 2018-11-11 15:52:49
