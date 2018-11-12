@@ -7,13 +7,12 @@
  */
 namespace frontend\widgets;
 
-use common\models\Category;
-use common\models\Content;
+use common\models\News;
 use DateTime;
 use yii\base\Widget;
 use Yii;
 
-class TagsWidget extends Widget{
+class ListNews extends Widget{
 
     public $message;
 
@@ -24,7 +23,13 @@ class TagsWidget extends Widget{
 
     public  function run()
     {
-        return $this->render('tags',[
+        $staffs = News::find()
+            ->andWhere(['status' => News::STATUS_ACTIVE])
+            ->andWhere(['type' => News::TYPE_STAFF])
+            ->orderBy(['updated_at' => SORT_DESC])
+            ->all();
+        return $this->render('list-staff',[
+            'staffs' => $staffs
         ]);
     }
 }

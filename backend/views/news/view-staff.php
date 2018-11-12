@@ -1,3 +1,4 @@
+
 <?php
 
 use common\models\News;
@@ -10,10 +11,6 @@ use yii\helpers\Html;
 $this->title = $model->display_name ? $model->display_name : News::getTypeName($model->type);
 $this->params['breadcrumbs'][] = ['label' => News::getTypeName($model->type), 'url' => ['index', 'type' => $model->type]];
 $this->params['breadcrumbs'][] = $this->title;
-$visible = false;
-if ($model->type == News::TYPE_NEWS || $model->type == News::TYPE_ABOUT) {
-    $visible = true;
-}
 
 ?>
 <div class="row">
@@ -48,28 +45,20 @@ if ($model->type == News::TYPE_NEWS || $model->type == News::TYPE_ABOUT) {
                         'attributes' => [
                             [
                                 'attribute' => 'display_name',
-                                'visible' => $visible,
                             ],
                             [
                                 'attribute' => 'image_display',
-                                'visible' => $visible,
                                 'format' => 'html',
                                 'value' => Html::img(Yii::getAlias('@web') . "/" . Yii::getAlias('@image_news') . "/" . $model->image_display, ['height' => '200px']),
                             ],
                             [
                                 'attribute' => 'status',
-                                'visible' => $visible,
                                 'value' => $model->getStatusName(),
                             ],
                             [
                                 'attribute' => 'short_description',
-                                'visible' => $visible,
                                 'format' => 'html',
                                 'value' => $model->short_description
-                            ],
-                            [
-                                'attribute' => 'content',
-                                'format' => 'raw',
                             ],
                             [
                                 'attribute' => 'created_at',
@@ -86,5 +75,3 @@ if ($model->type == News::TYPE_NEWS || $model->type == News::TYPE_ABOUT) {
         </div>
     </div>
 </div>
-
-

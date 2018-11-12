@@ -37,7 +37,7 @@
   padding-bottom: 5px;
 }
 .latest-deals-product .product-list li:hover{
-  border: 1px solid #b3110b;
+  border: 1px solid #FF6600;
 }
 .latest-deals-product .owl-next{
   top: -40px;
@@ -82,16 +82,16 @@
 	right: 10px;
 }
 .option2 .product-list li .quick-view a:hover{
-	background: #b3110b;
+	background: #FF6600;
 }
 .option2 .product-list li .quick-view a:hover{
-	background: #b3110b;
+	background: #FF6600;
 }
 .option2 .product-list li .quick-view a:hover {
-	background: #b3110b;
+	background: #FF6600;
 }
 .option2 .product-list li .add-to-cart:hover{
-	background: #b3110b;
+	background: #FF6600;
 }
 .option2 .product-list li .product-price {
 	color: #f96d10;
@@ -111,10 +111,10 @@
 	margin-top: 0;
 }
 .option2 a:hover{
-	color: #b3110b;
+	color: #FF6600;
 }
 .option2 .top-header .dropdown-menu{
-	border-top: 2px solid #b3110b;
+	border-top: 2px solid #FF6600;
 }
 .option2 .main-header .header-search-box{
 	padding-right: 0;
@@ -128,14 +128,14 @@
 	padding-top: 9px;
 }
 .option2 .main-header .header-search-box .form-inline .btn-search{
-	background-color: #c60909;
+	background-color: #FF9900;
 }
 
 .option2 .nav-top-menu.nav-ontop{
-	background: #c60909;
+	background: #FF9900;
 }
 .option2 .nav-top-menu{
-	background: #c60909;
+	background: #FF9900;
 }
 .option2 #main-menu .navbar{
 	border-radius: 0;
@@ -150,7 +150,7 @@
 .option2 #main-menu .navbar .navbar-nav>li:hover, 
 .option2 #main-menu .navbar .navbar-nav>li.active{
 	background-image: none;
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 #main-menu li.dropdown>a:after{
@@ -174,7 +174,7 @@
 }
 
 .option2 .nav-ontop #box-vertical-megamenus .title{
-	background: #b3110b;
+	background: #FF6600;
 	color: #fff;
 	border-left: none;
 }
@@ -191,7 +191,7 @@
 
 .option2 #form-search-opntop:hover form{
   border: 1px solid #dfdfdf;
-  background: #b3110b;
+  background: #FF6600;
 }
 .option2 #user-info-opntop a.current-open:before {
   color: #fff;
@@ -207,11 +207,11 @@
 }
 .option2 .header-top-right .homeslider .bx-controls-direction .bx-prev, 
 .option2 .header-top-right .homeslider .bx-controls-direction .bx-next{
-	background: #c60909;
+	background: #FF9900;
 }
 .option2 .header-top-right .homeslider .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .option2 .header-top-right .homeslider .bx-wrapper .bx-pager.bx-default-pager a.active{
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 .box-vertical-megamenus .vertical-menu-list {
@@ -222,7 +222,7 @@
 	padding: 0 20px;
 }
 .option2 .box-vertical-megamenus .vertical-menu-list>li:hover{
-	background: #b3110b;
+	background: #FF6600;
 }
 .option2 .box-vertical-megamenus .vertical-menu-list>li:hover>a{
 	color: #fff;
@@ -251,12 +251,12 @@
 	padding-right: 0;
 }
 .option2 .vertical-dropdown-menu .mega-group-header span{
-	border-color: #b3110b;
+	border-color: #FF6600;
 }
 .option2 .box-vertical-megamenus .all-category span:hover{
-	background: #b3110b;
+	background: #FF6600;
 	color: #fff;
-	border-color: #b3110b;
+	border-color: #FF6600;
 }
 .option2 .box-vertical-megamenus .all-category span:after{
 	  content: "\f101";
@@ -270,7 +270,7 @@
 	  color: #f96d10;
 }
 .option2 .cart-block .cart-block-content .cart-buttons a.btn-check-out{
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 .page-heading{
@@ -278,12 +278,12 @@
 	font-weight: bold;
 }
 .option2 .page-heading span.page-heading-title{
-	border-bottom: 3px solid #b3110b;
+	border-bottom: 3px solid #FF6600;
 }
 
 .option2 .owl-controls .owl-prev:hover, 
 .option2 .owl-controls .owl-next:hover {
-  background: #b3110b;
+  background: #FF6600;
   color: #fff;
 }
 
@@ -291,7 +291,7 @@
 	background: #eaeaea;
 }
 .option2 #main-menu .dropdown-menu .block-container .group_header>a{
-	border-color: #b3110b;
+	border-color: #FF6600;
 }
 
 /*
@@ -517,7 +517,7 @@
 	margin-right: 10px;
 }
 .option2 .product-featured .deal-product .price .product-price{
-	color: #b3110b;
+	color: #FF6600;
 	font-size: 18px;
 }
 .option2 .product-featured .deal-product .price .old-price{
@@ -618,30 +618,30 @@
 /** OPTION CATEGORY **/
 
 .option2 .category-featured.fashion .sub-category-list a:hover{
-	color: #b3110b;
+	color: #FF6600;
 }
 .option2 .category-featured.fashion .navbar-brand{
-	background: #c60909;
+	background: #FF9900;
 }
 .option2 .category-featured.fashion .navbar-brand a:hover{
 	color: #fff;
 }
 .option2 .category-featured.fashion .nav-menu .navbar-collapse {
 	background: #fff;
-	border-bottom: 2px solid #b3110b;
+	border-bottom: 2px solid #FF6600;
 }
 .option2 .category-featured.fashion .nav-menu .nav>li:hover a,
 .option2 .category-featured.fashion .nav-menu .nav>li.active a{
-	color: #b3110b;
+	color: #FF6600;
 }
 
 .option2 .category-featured.fashion .nav-menu .nav>li:hover a:after,
 .option2 .category-featured.fashion .nav-menu .nav>li.active a:after{
-	color: #b3110b;
+	color: #FF6600;
 }
 
 .option2 .category-featured.fashion .nav-menu .nav>li>a:before{
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 .category-featured.fashion .product-list li .add-to-cart {
@@ -649,13 +649,13 @@
 	color: rgba(255, 51, 102, 0.7);
 }
 .option2 .category-featured.fashion .product-list li .add-to-cart:hover {
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 .category-featured.fashion .product-list li .quick-view a.search:hover,
 .option2 .category-featured.fashion .product-list li .quick-view a.compare:hover,
 .option2 .category-featured.fashion .product-list li .quick-view a.heart:hover{
-	background-color: #b3110b;
+	background-color: #FF6600;
 	opacity: 0.9;
 }
 
@@ -926,11 +926,11 @@
 	margin-top: 60px;
 }
 .option2 #mail-box .btn{
-	background: #b3110b;
+	background: #FF6600;
 }
 
 .option2 .scroll_top:hover{
-	background: #b3110b;
+	background: #FF6600;
 }
 
 
@@ -967,7 +967,7 @@
 }
 
 .option2 .blog-list .blog-list-wapper ul li .readmore a{
-	color: #b3110b;
+	color: #FF6600;
 }
 
 
@@ -1181,10 +1181,10 @@
 		background: none;
 	}
 	.option2 #main-menu .navbar-header{
-		background: #c60909;
+		background: #FF9900;
 	}
 	.option2 #main-menu .navbar-default .navbar-nav>li>a{
-		background: #c60909;
+		background: #FF9900;
 		color: white;
 	}
 	.option2 #main-menu li.dropdown>a:after {

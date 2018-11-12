@@ -51,18 +51,7 @@ use yii\helpers\Url;
                     <div class="col-sm-6">
                         <div class="introduce-title">Truy cập nhanh</div>
                         <ul id="introduce-Account" class="introduce-list">
-                            <?php
-                            iF ($cats) {
-                                /** @var \common\models\Category $category */
-                                foreach ($cats as $category) {
-                                    ?>
-                                    <li>
-                                        <a href="<?= Url::to(['category/index', 'id' => $category->id]) ?>"><?= $category->display_name ?></a>
-                                    </li>
-                                    <?php
-                                }
-                            }
-                            ?>
+
                         </ul>
                     </div>
                 </div>

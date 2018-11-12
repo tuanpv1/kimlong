@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SlideContent */
+/* @var $model common\models\Slide */
 
 $this->title = Yii::t('app', 'Tạo Slide');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Quản lý slide'), 'url' => ['index']];
@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="portlet-body form">
                 <?= $this->render('_form', [
                     'model' => $model,
-                    'type'=>$type
                 ]) ?>
             </div>
         </div>

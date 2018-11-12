@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\News;
 use common\models\NewsSearch;
+use Yii;
 use yii\bootstrap\ActiveForm;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
@@ -48,7 +48,7 @@ class NewsController extends Controller
             } else {
                 return $this->redirect(['create', 'type' => $type]);
             }
-        } elseif ($type == News::TYPE_NEWS) {
+        } else {
             $searchModel = new NewsSearch();
             $params = Yii::$app->request->queryParams;
 
@@ -71,9 +71,16 @@ class NewsController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+        if ($model->type == News::TYPE_STAFF) {
+            return $this->render('view-staff', ['model' => $model]);
+        }
+
+        if($model->type == News::TYPE_PRODUCT){
+            return $this->render('view-project', ['model' => $model]);
+        }
+
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
@@ -98,6 +105,15 @@ class NewsController extends Controller
                 $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
                 if ($image_display->saveAs($tmp . $file_name)) {
                     $model->image_display = $file_name;
+                }
+            }
+
+            $image_banner = UploadedFile::getInstance($model, 'image_banner');
+            if ($image_banner) {
+                $file_name = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_display->extension;
+                $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                if ($image_banner->saveAs($tmp . $file_name)) {
+                    $model->image_banner = $file_name;
                 }
             }
 
@@ -134,10 +150,12 @@ class NewsController extends Controller
     {
         $model = $this->findModel($id);
         $old_image_display = $model->image_display;
-        if(!$model->created_user_id){
+        $old_image_banner = $model->image_banner;
+        if (!$model->created_user_id) {
             $model->created_user_id = Yii::$app->user->id;
         }
         if ($model->load(Yii::$app->request->post())) {
+
             $image_display = UploadedFile::getInstance($model, 'image_display');
             if ($image_display) {
                 $file_name = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_display->extension;
@@ -148,6 +166,18 @@ class NewsController extends Controller
             } else {
                 $model->image_display = $old_image_display;
             }
+
+            $image_banner = UploadedFile::getInstance($model, 'image_banner');
+            if ($image_banner) {
+                $file_name_banner = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_banner->extension;
+                $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                if ($image_banner->saveAs($tmp . $file_name_banner)) {
+                    $model->image_banner = $file_name_banner;
+                }
+            } else {
+                $model->image_banner = $old_image_banner;
+            }
+
             if ($model->update(false)) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Cập nhật thành công!'));
                 return $this->redirect(['view', 'id' => $model->id]);

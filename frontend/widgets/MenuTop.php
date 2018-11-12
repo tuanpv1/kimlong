@@ -24,28 +24,6 @@ class MenuTop extends Widget
 
     public function run()
     {
-        $categories = Category::find()
-            ->andWhere(['status' => Category::STATUS_ACTIVE])
-            ->andWhere(['parent_id' => null])
-            ->orderBy(['order_number' => SORT_DESC])
-            ->all();
-        return $this->render('menu-top', [
-            'categories' => $categories
-        ]);
-    }
-
-    public static function getChildlevel1NoImage($id)
-    {
-        echo '<ul class="dropdown-menu container-fluid">
-                  <li class="block-container">
-                      <ul class="block">';
-        $cat1 = Category::find()->andWhere(['status' => Category::STATUS_ACTIVE])->andWhere(['parent_id' => $id])->all();
-        /** @var  $item Category */
-        foreach ($cat1 as $item) {
-            echo '<li class="link_container"><a href="' . Url::to(['category/index', 'id' => $item->id]) . '">' . $item->display_name . '</a></li>';
-        }
-        echo '        </ul>
-                  </li>
-              </ul> ';
+        return $this->render('menu-top');
     }
 }

@@ -13,9 +13,17 @@ use yii\helpers\Url;
  * @property string $display_name
  * @property string $short_description
  * @property string $description
+ * @property string $address
+ * @property string $position
+ * @property string $utilities
+ * @property string $design
+ * @property string $legal
+ * @property string $own
  * @property string $image_display
+ * @property string $image_banner
  * @property string $content
  * @property int $type
+ * @property int $hot
  * @property int $created_at
  * @property int $status
  * @property int $updated_at
@@ -23,10 +31,11 @@ use yii\helpers\Url;
  */
 class News extends \yii\db\ActiveRecord
 {
-    const TYPE_BANNER = 1;
     const TYPE_NEWS = 2;
     const TYPE_ABOUT = 3;
     const TYPE_CONTACT = 4;
+    const TYPE_PRODUCT = 5;
+    const TYPE_STAFF = 6;
 
     const STATUS_NEW = 1;
     const STATUS_ACTIVE = 10;
@@ -34,6 +43,7 @@ class News extends \yii\db\ActiveRecord
     const STATUS_DELETED = 2;
 
     const IS_SLIDE = 1;
+    const IS_HOT = 1;
 
     /**
      * @inheritdoc
@@ -49,12 +59,12 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description', 'image_display', 'content'], 'string'],
-            [['type', 'created_at', 'status', 'updated_at', 'created_user_id'], 'integer'],
+            [['description', 'image_display', 'image_banner', 'content', 'own', 'legal', 'design', 'utilities', 'position', 'address'], 'string'],
+            [['type', 'created_at', 'status', 'updated_at', 'created_user_id', 'hot'], 'integer'],
             [['display_name', 'short_description'], 'string', 'max' => 500],
             [['short_description', 'display_name', 'content'], 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],
             ['image_display', 'required', 'on' => 'create'],
-            [['image_display'],
+            [['image_display','image_banner'],
                 'file',
                 'tooBig' => Yii::t('app', '{attribute} vượt quá dung lượng cho phép. Vui lòng thử lại'),
                 'wrongExtension' => Yii::t('app', '{attribute} không đúng định dạng'),
@@ -74,7 +84,6 @@ class News extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'display_name' => Yii::t('app', 'Tên hiển thị'),
             'short_description' => Yii::t('app', 'Mô tả ngắn'),
-            'description' => Yii::t('app', 'Nội dung chi tiết'),
             'image_display' => Yii::t('app', 'Hình ảnh đại diện'),
             'content' => Yii::t('app', 'Nội dung'),
             'type' => Yii::t('app', 'Loại'),
@@ -82,6 +91,13 @@ class News extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Trạng thái'),
             'updated_at' => Yii::t('app', 'Ngày thay đổi thông tin'),
             'created_user_id' => Yii::t('app', 'Người tạo'),
+            'address' => Yii::t('app', 'Địa chỉ'),
+            'position' => Yii::t('app', 'Vị trí'),
+            'utilities' => Yii::t('app', 'Tiện ích'),
+            'design' => Yii::t('app', 'Thiết kế'),
+            'legal' => Yii::t('app', 'Pháp lý'),
+            'own' => Yii::t('app', 'Chủ đầu tư'),
+            'image_banner' => Yii::t('app', 'Hình ảnh slide'),
         ];
     }
 
@@ -115,9 +131,10 @@ class News extends \yii\db\ActiveRecord
     {
         $lst = [
             self::TYPE_NEWS => Yii::t('app', 'Tin tức'),
-            self::TYPE_BANNER => Yii::t('app', 'Tin tức banner'),
             self::TYPE_CONTACT => Yii::t('app', 'Thông tin liên hệ'),
             self::TYPE_ABOUT => Yii::t('app', 'Giới thiệu'),
+            self::TYPE_PRODUCT => Yii::t('app', 'Dự án'),
+            self::TYPE_STAFF => Yii::t('app', 'Chuyên viên tư vấn')
         ];
         return $lst;
     }
@@ -170,8 +187,8 @@ class News extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {
-        foreach (array_keys($this->getAttributes()) as $attr){
-            if(!empty($this->$attr)){
+        foreach (array_keys($this->getAttributes()) as $attr) {
+            if (!empty($this->$attr)) {
                 $this->$attr = \yii\helpers\HtmlPurifier::process($this->$attr);
             }
         }

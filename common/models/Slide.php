@@ -23,8 +23,6 @@ use yii\helpers\Url;
  * @property integer $type
  * @property integer $category_id
  *
- * @property Content $content
- * @property ServiceProvider $serviceProvider
  */
 class Slide extends \yii\db\ActiveRecord
 {
@@ -120,12 +118,12 @@ class Slide extends \yii\db\ActiveRecord
          * @var $content Content
          */
         Yii::info('Validate content');
-        $content = Content::findOne($this->content_id);
+        $content = News::findOne($this->content_id);
         if (!$content) {
             $this->addError($attribute,Yii::t('app', 'Không tồn tại sản phẩm này'));
         }else{
-            $images = $content->getImages();
-            if(count($images) <= 0){
+            $images = $content->image_banner;
+            if(empty($images)){
                 $this->addError($attribute, Yii::t('app','Sản phẩm không có hình ảnh'));
             }
         }
@@ -158,12 +156,6 @@ class Slide extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getServiceProvider(){
-        return $this->hasOne(ServiceProvider::className(), ['id' => 'service_provider_id']);
-    }
 
     public static function getMaxWeigh(){
         $max = Slide::find()->orderBy('weight DESC')->one();
@@ -178,30 +170,8 @@ class Slide extends \yii\db\ActiveRecord
      */
     public function getContent()
     {
-        return $this->hasOne(Content::className(), ['id' => 'content_id']);
+        return $this->hasOne(News::className(), ['id' => 'content_id']);
     }
-
-//    public function saveBannerFile(){
-//        if($this->type == self::SLIDE_TYPE_BANNER && $this->file_banner != null){
-//            /**
-//             * Xoa file cu
-//             */
-//            if($this->file_banner && !$this->isNewRecord){
-//                $this->deleteBannerFile();
-//            }
-//            $ext = end(explode(".", $this->file_banner->name));
-//            $file_save = Yii::$app->security->generateRandomString().".{$ext}";
-//            $folder = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . Yii::getAlias('@content_banner') . DIRECTORY_SEPARATOR;
-//            if (!is_dir($folder)) {
-//                FileHelper::createDirectory($folder);
-//            }
-//            $path = $folder.$file_save;
-//            $this->file_banner->saveAs($path);
-////            $this->banner = '@content_banner'.DIRECTORY_SEPARATOR.$file_save;
-//            $this->banner = $file_save;
-//            $this->update(false);
-//        }
-//    }
 
     public function beforeDelete()
     {
@@ -263,15 +233,8 @@ class Slide extends \yii\db\ActiveRecord
 
     public function getSlideImage(){
         $image_default = 'category-slide.jpg';
-        $model = Content::findOne($this->content_id);
-        $listImages = Content::convertJsonToArray($model->images);
-        $link = '';
-        foreach ($listImages as $key => $row) {
-            if ($row['type'] == Content::IMAGE_TYPE_SLIDECATEGORY) {
-                $link = Url::to('@web/admin/staticdata/content_images/'. $row['name'], true);
-            }
-        }
-        Yii::error($link);
+        $model = News::findOne($this->content_id);
+        $link = Url::to('@web/admin/staticdata/content_images/'. $model->image_banner, true);
         return $link;
 //        if(file_exists($link)){
 //            return $link;
@@ -282,15 +245,8 @@ class Slide extends \yii\db\ActiveRecord
 
     public static function getSlideHomeFe($id){
         $image_default = 'slide-option2.jpg';
-        $model = Content::findOne($id);
-        $listImages = Content::convertJsonToArray($model->images);
-        $link = '';
-        foreach ($listImages as $key => $row) {
-            if ($row['type'] == Content::IMAGE_TYPE_SLIDE) {
-                $link = Url::to('@web/admin/staticdata/content_images/'. $row['name'], true);
-            }
-        }
-        Yii::error($link);
+        $model = News::findOne($id);
+        $link = Url::to('@web/admin/staticdata/content_images/'. $model->image_banner, true);
         return $link;
 //        if(file_exists($link)){
 //            return $link;

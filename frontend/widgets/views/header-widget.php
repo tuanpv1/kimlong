@@ -13,47 +13,6 @@ use yii\helpers\Url;
 /** @var $info \common\models\InfoPublic */
 ?>
 <div id="header" class="header">
-    <div class="top-header">
-        <div class="container">
-            <div class="nav-top-links">
-                <a class="first-item" href="#"><img alt="phone" src="/images/phone.png"/><?= $info->phone ?></a>
-                <a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a>
-            </div>
-
-            <div id="user-info-top" class="user-info pull-right">
-                <div class="dropdown">
-                    <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       href="#"><span>Tài khoản</span></a>
-                    <ul class="dropdown-menu mega_dropdown" role="menu">
-                        <?php
-                        if (Yii::$app->user->isGuest) {
-                            ?>
-                            <li><a data-toggle="modal" data-target="#myModal" href="javascript:void(0)">Đăng nhập</a>
-                            </li>
-                            <?php
-                        } else {
-                            ?>
-                            <li><a class="uppercase"
-                                   href="<?= Url::to(['subscriber/info']) ?>"><?= Yii::$app->user->identity->full_name ? Yii::$app->user->identity->full_name : Yii::$app->user->identity->username ?></a>
-                            </li>
-                            <li><a class="uppercase" href="<?= Url::to(['subscriber/info']) ?>">Đơn hàng</a></li>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        if (!Yii::$app->user->isGuest) {
-                            ?>
-                            <li><a class="uppercase" href="<?= Url::to(['site/logout']) ?>" data-method="post">Đăng xuất</a>
-                            </li>
-                            <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/.top-header -->
     <!-- MAIN HEADER -->
     <div class="container main-header">
         <div class="row">
@@ -63,9 +22,6 @@ use yii\helpers\Url;
                          src="<?= \common\models\InfoPublic::getImage($info->image_header) ?>"/></a>
             </div>
             <?= \frontend\widgets\SearchCategory::widget() ?>
-            <div id="tp_id_reload">
-                <?= \frontend\widgets\CartBox::widget() ?>
-            </div>
         </div>
 
     </div>

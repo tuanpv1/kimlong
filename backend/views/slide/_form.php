@@ -2,16 +2,14 @@
 
 use common\models\Category;
 use common\models\Content;
+use common\models\News;
 use common\models\ServiceProvider;
 use common\models\Slide;
 use common\models\SlideContent;
 use kartik\form\ActiveForm;
 use kartik\widgets\DepDrop;
-use kartik\widgets\FileInput;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Slide */
@@ -33,60 +31,32 @@ $showPreview = !$model->isNewRecord && !empty($model->banner) && ($model->type =
 ]); ?>
     <div class="form-body">
         <?= $form->field($model, 'des')->textarea(['rows' => 6, 'class' => 'input-circle']) ?>
-    <?php if($type ==  Slide::SLIDE_HOME){ ?>
+
+        <?= $form->field($model, 'status')->dropDownList(Slide::getSlideStatus()) ?>
         <?php
         /**
-         * @var $contents Content[]
+         * @var $contents News[]
          */
         $dataList = [];
-        $contents =  Content::find()
-            ->andWhere(['is_slide'=>1])
+        $contents = News::find()
+            ->andWhere(['status' => News::STATUS_ACTIVE])
+            ->andWhere(['IN', 'type', [News::TYPE_PRODUCT, News::TYPE_NEWS]])
+            ->andWhere(['<>', 'image_banner', ''])
             ->all();
-        foreach($contents as $content){
+        foreach ($contents as $content) {
             $dataList[$content->id] = $content->display_name;
         }
         echo $form->field($model, 'content_id')->widget(DepDrop::classname(),
             [
-                'data'=>$dataList,
+                'data' => $dataList,
                 'type' => 2,
-                'options'=>['placeholder'=>Yii::t('app','-Nội dung-')],
-                'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
-                'pluginOptions'=>[
-                    'depends'=>['service-provider-id'],
-                    'url'=>Url::to(['/slide-content/get-content']),
+                'options' => ['placeholder' => Yii::t('app', '-Tin tức-')],
+                'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                'pluginOptions' => [
+                    'depends' => ['service-provider-id'],
+                    'url' => Url::to(['/slide-content/get-content']),
                 ]
             ]);
-        ?>
-        <?php }else{ ?>
-            <?php
-            /**
-             * @var $contents Content[]
-             */
-            $dataList = [];
-            $contents =  Content::find()
-                ->andWhere(['is_slide_category'=>1])
-                ->all();
-            foreach($contents as $content){
-                $dataList[$content->id] = $content->display_name;
-            }
-            echo $form->field($model, 'content_id')->widget(DepDrop::classname(),
-                [
-                    'data'=>$dataList,
-                    'type' => 2,
-                    'options'=>['placeholder'=>Yii::t('app','-Nội dung-')],
-                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
-                    'pluginOptions'=>[
-                        'depends'=>['service-provider-id'],
-                        'url'=>Url::to(['/slide-content/get-content']),
-                    ]
-                ]);
-            ?>
-            <?php
-            echo $form->field($model, 'category_id')->dropDownList(Slide::getListCategory());
-            ?>
-        <?php } ?>
-        <?php
-        echo $form->field($model, 'status')->dropDownList(Slide::getSlideStatus());
         ?>
     </div>
 

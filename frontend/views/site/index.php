@@ -1,4 +1,5 @@
 <?php
+use frontend\widgets\GalleryWidget;
 use frontend\widgets\HomeSlide;
 use frontend\widgets\LatestDeals;
 use yii\web\View;
@@ -36,13 +37,22 @@ $this->registerJs($js_toastr, View::POS_READY);
 <!-- Home slideder-->
 <?= HomeSlide::widget() ?>
 <!-- END Home slideder-->
-<!-- servives -->
-<?= LatestDeals::widget() ?>
-<!-- end services -->
+
+<?= \frontend\widgets\IntroduceWidget::widget() ?>
+
 <div class="content-page">
     <div class="container">
         <?= \frontend\widgets\ContentBody::widget() ?>
     </div>
 </div>
 
-<?= \frontend\widgets\CartBox::getModal() ?>
+<?= LatestDeals::widget() ?>
+
+<div class="content-page">
+    <div class="container">
+        <?= GalleryWidget::widget() ?>
+    </div>
+</div>
+
+<!-- chuyên viên tư vấn-->
+<?= \frontend\widgets\ListNews::widget() ?>

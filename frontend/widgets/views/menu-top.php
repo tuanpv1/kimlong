@@ -6,6 +6,7 @@
  * Time: 5:06 PM
  */
 use common\models\Category;
+use common\models\News;
 use yii\helpers\Url;
 
 ?>
@@ -24,23 +25,10 @@ use yii\helpers\Url;
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?= Url::home() ?>">Home</a></li>
-                        <?php
-                        if ($categories) {
-                            /** @var Category $category */
-                            foreach ($categories as $category) {
-                                ?>
-                                <li class="<?= !empty($category->child_count) ? 'dropdown' : '' ?>">
-                                    <a href="<?= Url::to(['category/index', 'id' => $category->id]) ?>"
-                                        <?php if(!empty($category->child_count)){ ?> class="dropdown-toggle" data-toggle="dropdown" <?php } ?>>
-                                        <?= $category->display_name ?>
-                                    </a>
-                                    <?php if(!empty($category->child_count)){ \frontend\widgets\MenuTop::getChildlevel1NoImage($category->id); } ?>
-                                </li>
-                                <?php
-                            }
-                        }
-                        ?>
+                        <li class="active"><a href="<?= Url::home() ?>">Trang chủ</a></li>
+                        <li><a href="<?= Url::to(['news/projects']) ?>">Dự án</a></li>
+                        <li><a href="<?= Url::to(['news/index']) ?>">Tin nội bộ</a></li>
+                        <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
                         <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->

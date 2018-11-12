@@ -9,6 +9,7 @@ namespace frontend\widgets;
 
 use common\models\Category;
 use common\models\Content;
+use common\models\News;
 use DateTime;
 use yii\base\Widget;
 use Yii;
@@ -16,7 +17,7 @@ use Yii;
 class WidgetNewContent extends Widget{
 
     public $message;
-    public $id;
+    public $project;
 
     public  function init()
     {
@@ -25,17 +26,28 @@ class WidgetNewContent extends Widget{
 
     public  function run()
     {
-        $product_news = Content::find()
-            ->select('content.id,content.display_name,content.type,content.short_description,content.price,content.images,content.price_promotion')
-            ->andWhere(['content.status'=>Content::STATUS_ACTIVE])
-            ->andWhere(['content.type'=>Content::TYPE_NEWEST])
-            ->orderBy(['content.created_at'=>'DESC'])
-            ->andWhere(['<>', 'content.id', $this->id])
-            ->limit(6)
-            ->all();
+        if($this->project){
+            $news = News::find()
+                ->andWhere(['status' => News::STATUS_ACTIVE])
+                ->andWhere(['type' => News::TYPE_PRODUCT])
+                ->andWhere(['hot' => News::IS_HOT])
+                ->orderBy('created_at')
+                ->limit(4)
+                ->all();
+            $name = "Dự án bất động sản hot";
+        }else{
+            $name = Yii::t('app', 'Tin bất động sản mới');
+            $news = News::find()
+                ->andWhere(['status' => News::STATUS_ACTIVE])
+                ->andWhere(['type' => News::TYPE_NEWS])
+                ->orderBy('created_at')
+                ->limit(4)
+                ->all();
+        }
         // sản phẩm sale
         return $this->render('widget-new-content',[
-            'product_news'=>$product_news,
+            'news'=>$news,
+            'name' => $name
         ]);
     }
 }

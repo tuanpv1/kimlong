@@ -110,88 +110,52 @@ NavBar::begin([
 ]);
 $menuItems = [
     [
-        'label' => 'Quản lý nội dung',
+        'label' => 'Quản lý',
         'url' => 'javascript:;',
         'options' => ['class' => 'menu-dropdown mega-menu-dropdown'],
         'linkOptions' => ['data-hover' => 'megamenu-dropdown', 'data-close-others' => 'true'],
         'items' => [
             [
                 'encode' => false,
-                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Sản phẩm'),
-                'url' => ['content/index'],
+                'label' => '<i class="fa fa-server"></i> '.Yii::t('app','Dự án'),
+                'url' => ['news/index','type'=>\common\models\News::TYPE_PRODUCT],
                 'require_auth' => true,
             ],
             [
                 'encode' => false,
-                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Thông tin giới thiệu'),
+                'label' => '<i class="fa fa-gift"></i>'.Yii::t('app',' Tin tức'),
+                'url' => ['news/index','type'=>\common\models\News::TYPE_NEWS],
+                'require_auth' => true,
+            ],
+            [
+                'encode' => false,
+                'label' => '<i class="fa fa-gift"></i>'.Yii::t('app',' Chuyên viên tư vấn'),
+                'url' => ['news/index','type'=>\common\models\News::TYPE_STAFF],
+                'require_auth' => true,
+            ],
+            [
+                'encode' => false,
+                'label' => '<i class="fa fa-server"></i> '.Yii::t('app','Slide'),
+                'url' => ['slide/index'],
+                'require_auth' => true,
+            ],
+            [
+                'encode' => false,
+                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Giới thiệu'),
                 'url' => ['news/index','type' => \common\models\News::TYPE_ABOUT],
                 'require_auth' => true,
             ],
             [
                 'encode' => false,
-                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Thông tin liên hệ'),
+                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Liên hệ'),
                 'url' => ['news/index','type' => \common\models\News::TYPE_CONTACT],
                 'require_auth' => true,
             ],
             [
                 'encode' => false,
-                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Quản  lý thông tin tĩnh'),
+                'label' => '<i class="fa fa-server"></i>'. Yii::t('app','Thông tin tĩnh'),
                 'url' => ['info-public/index'],
                 'require_auth' => true,
-            ],
-        ]
-    ],
-    [
-        'label' => 'Quản lý Danh mục',
-        'url' => 'javascript:;',
-        'options' => ['class' => 'menu-dropdown mega-menu-dropdown'],
-        'linkOptions' => ['data-hover' => 'megamenu-dropdown', 'data-close-others' => 'true'],
-        'items' => [
-            [
-                'encode' => false,
-                'label' => '<i class="fa fa-server"></i>'.Yii::t('app','Danh mục'),
-                'url' => ['category/index'],
-                'require_auth' => true,
-            ],
-
-        ]
-    ],
-    [
-        'label' => 'Quản lý slide',
-        'url' => 'javascript:;',
-        'options' => ['class' => 'menu-dropdown mega-menu-dropdown'],
-        'linkOptions' => ['data-hover' => 'megamenu-dropdown', 'data-close-others' => 'true'],
-        'items' => [
-            [
-                'encode' => false,
-                'label' => '<i class="fa fa-server"></i> '.Yii::t('app','Slide trang chủ'),
-                'url' => ['slide/index','type'=>\common\models\Slide::SLIDE_HOME],
-                'require_auth' => true,
-            ],
-            [
-                'encode' => false,
-                'label' => '<i class="fa fa-gift"></i>'.Yii::t('app',' Slide trang danh mục'),
-                'url' => ['slide/index','type'=>\common\models\Slide::SLIDE_CATEGORY],
-                'require_auth' => true,
-            ],
-
-        ]
-    ],
-    [
-        'label' => 'Thống kê báo cáo',
-        'url' => 'javascript:;',
-        'options' => ['class' => 'menu-dropdown mega-menu-dropdown'],
-        'linkOptions' => ['data-hover' => 'megamenu-dropdown', 'data-close-others' => 'true'],
-        'items' => [
-            [
-                'encode' => false,
-                'label' => 'Thống kê đơn hàng',
-                'url' => ['order/index'],
-            ],
-            [
-                'encode' => false,
-                'label' => 'Báo cáo',
-                'url' => ['report/product'],
             ],
         ]
     ],

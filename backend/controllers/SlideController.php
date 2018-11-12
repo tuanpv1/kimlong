@@ -2,11 +2,9 @@
 
 namespace backend\controllers;
 
-use common\auth\filters\Yii2Auth;
 use common\components\ActionLogTracking;
-use common\components\ActionSPFilter;
-use common\components\SPOwnerFilter;
 use common\models\Content;
+use common\models\News;
 use common\models\ServiceProvider;
 use common\models\Slide;
 use common\models\SlideSearch;
@@ -15,11 +13,9 @@ use kartik\form\ActiveForm;
 use sp\controllers\BaseSPController;
 use Yii;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\web\UploadedFile;
 
 /**
  * SlideController implements the CRUD actions for Slide model.
@@ -67,12 +63,12 @@ class SlideController extends Controller
     public function actionIndex($type = Slide::SLIDE_HOME)
     {
         $searchModel = new SlideSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$type);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $type);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'type'=>$type
+            'type' => $type
         ]);
     }
 
@@ -93,7 +89,7 @@ class SlideController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($type = Slide::SLIDE_HOME)
+    public function actionCreate()
     {
         $model = new Slide();
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -103,7 +99,6 @@ class SlideController extends Controller
 
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->type = $type;
             if ($model->save()) {
 //                $model->saveBannerFile();
                 \Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Thêm mới Slide thành công!'));
@@ -115,7 +110,6 @@ class SlideController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
-            'type'  => $type
         ]);
     }
 
@@ -145,31 +139,30 @@ class SlideController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'type' =>$type
+                'type' => $type
             ]);
         }
     }
-    public function actionGetContent() {
+
+    public function actionGetContent()
+    {
         $out = [];
         Yii::$app->response->format = Response::FORMAT_JSON;
         if (isset($_POST['depdrop_parents'])) {
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {
-                $sp_id = $parents[0];
-                $contents =  Content::find()->where(['service_provider_id' => $sp_id, 'status' => Content::STATUS_ACTIVE])->all();
-                foreach($contents as $content){
-                    $out[] = ['id' => $content->id, 'name' => $content->display_name.' - ('.Content::$list_type[$content->type].')'];
+                $contents = News::find()
+                    ->andWhere(['status' => News::STATUS_ACTIVE])
+                    ->andWhere(['IN', 'type', [News::TYPE_PRODUCT, News::TYPE_NEWS]])
+                    ->andWhere(['<>', 'image_banner', ''])
+                    ->all();
+                foreach ($contents as $content) {
+                    $out[] = ['id' => $content->id, 'name' => $content->display_name . ' - (' . News::getTypeName($content->type) . ')'];
                 }
-                // the getSubCatList function will query the database based on the
-                // cat_id and return an array like below:
-                // [
-                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-                // ]
-                return ['output'=>$out, 'selected'=>''];
+                return ['output' => $out, 'selected' => ''];
             }
         }
-        return ['output'=>'', 'selected'=>''];
+        return ['output' => '', 'selected' => ''];
     }
 
 
@@ -202,7 +195,7 @@ class SlideController extends Controller
         if (($model = Slide::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('app','Slide không tồn tại'));
+            throw new NotFoundHttpException(Yii::t('app', 'Slide không tồn tại'));
         }
     }
 }

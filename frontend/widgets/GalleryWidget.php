@@ -1,20 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: TuanPham
- * Date: 11/19/2016
- * Time: 9:09 PM
+ * User: TuanPV
+ * Date: 11/12/2018
+ * Time: 1:07 PM
  */
+
 namespace frontend\widgets;
 
-use common\models\Category;
-use common\models\Content;
+
 use common\models\News;
 use yii\base\Widget;
-use Yii;
 
-class ContentBody extends Widget{
-
+class GalleryWidget extends Widget
+{
     public $message;
 
     public  function init()
@@ -25,10 +24,9 @@ class ContentBody extends Widget{
     public  function run()
     {
         $news = News::find()
-            ->andWhere(['type' => News::TYPE_PRODUCT])
             ->andWhere(['status' => News::STATUS_ACTIVE])
-            ->andWhere(['hot' => News::IS_HOT])
-            ->limit(6)->all();
-        return $this->render('content-body',['news' => $news]);
+            ->andWhere(['type' => News::TYPE_PRODUCT])
+            ->all();
+        return $this->render('gallery-images',['news' => $news]);
     }
 }

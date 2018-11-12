@@ -30,7 +30,6 @@ class FooterWidget extends Widget
         if (!$info) {
             throw new NotFoundHttpException(Yii::t('app', 'Chưa được cài đặt thông số tĩnh xin cập nhật từ trang quản trị'));
         }
-        $cats = Category::findAll(['parent_id' => null, 'status' => Category::STATUS_ACTIVE]);
-        return $this->render('footer-widget', ['info' => $info, 'cats' => $cats]);
+        return $this->render('footer-widget', ['info' => $info]);
     }
 }

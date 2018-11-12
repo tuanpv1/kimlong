@@ -30,10 +30,13 @@ class AppAsset extends AssetBundle
         'css/style.css',
         'css/responsive.css',
         'css/option2.css',
+        'css/amazingslider-1.css',
         'css/site.css',
     ];
     public $js = [
         'lib/jquery/jquery-1.11.2.min.js',
+        'js/amazingslider.js',
+        'js/initslider-1.js',
         'lib/bootstrap/js/bootstrap.min.js',
         'lib/select2/js/select2.min.js',
         'lib/jquery.bxslider/jquery.bxslider.min.js',
