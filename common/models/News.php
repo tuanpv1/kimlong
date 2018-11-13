@@ -22,6 +22,9 @@ use yii\helpers\Url;
  * @property string $image_display
  * @property string $image_banner
  * @property string $content
+ * @property string $map
+ * @property string $video
+ * @property string $phone
  * @property int $type
  * @property int $hot
  * @property int $created_at
@@ -72,6 +75,7 @@ class News extends \yii\db\ActiveRecord
                 'extensions' => 'png, jpg, jpeg, gif',
                 'maxSize' => 1024 * 1024 * 10
             ],
+            [['map','string','phone'],'string']
         ];
     }
 
@@ -98,6 +102,9 @@ class News extends \yii\db\ActiveRecord
             'legal' => Yii::t('app', 'Pháp lý'),
             'own' => Yii::t('app', 'Chủ đầu tư'),
             'image_banner' => Yii::t('app', 'Hình ảnh slide'),
+            'map' => Yii::t('app', 'Bản đồ'),
+            'phone' => Yii::t('app', 'Điện thoại'),
+            'video' => Yii::t('app', 'Video'),
         ];
     }
 
@@ -161,8 +168,11 @@ class News extends \yii\db\ActiveRecord
             $pathLink = Yii::getAlias("@web/img/");
             $filename = 'bg_df.png';
         }
-
-        return Url::to($pathLink . $filename, true);
+        $link = Url::to($pathLink . $filename, true);
+        if(strpos($link,'/admin/') === false){
+            $link = str_replace('/staticdata/', '/admin/staticdata/', $link);
+        }
+        return $link;
     }
 
     public function behaviors()

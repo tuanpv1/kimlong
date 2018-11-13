@@ -51,6 +51,27 @@ use yii\helpers\Url;
                     <div class="content-text clearfix">
                         <?= $new->short_description ?>
                     </div>
+                    <?php if ($new->map && $new->video) { ?>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <iframe width="560" height="315" src="<?= $new->video ?>" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <?= $new->map ?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="content-text text-center">
+
+                            <?php if ($new->map) {
+                                echo $new->map;
+                            } else if ($new->video) { ?>
+                                <iframe width="560" height="315" src="<?= $new->video ?>" frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
                 </article>
                 <!-- tab product -->
                 <div class="product-tab">

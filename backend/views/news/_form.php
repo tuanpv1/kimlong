@@ -82,6 +82,8 @@ $urlUploadImage = \yii\helpers\Url::to(['/app/upload']);
                     'filebrowserUploadUrl' => $urlUploadImage
                 ],
             ]); ?>
+        <?php }else{ ?>
+            <?= $form->field($model, 'phone')->textInput() ?>
         <?php } ?>
     <?php } elseif ($type == News::TYPE_PRODUCT) {
         ?>
@@ -120,6 +122,10 @@ $urlUploadImage = \yii\helpers\Url::to(['/app/upload']);
                 <?= $form->field($model, 'status')->dropDownList(\common\models\News::listStatus()) ?>
 
                 <?= $form->field($model, 'short_description')->textarea(['rows' => 4]) ?>
+
+                <?= $form->field($model, 'map')->textarea(['rows' => 4]) ?>
+
+                <?= $form->field($model, 'video')->textInput() ?>
 
                 <?= $form->field($model, 'own')->textarea(['rows' => 4]) ?>
             </div>
