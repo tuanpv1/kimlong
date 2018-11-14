@@ -10,51 +10,30 @@ use yii\helpers\Url;
         <div id="introduce-box" class="row">
             <div class="col-md-3">
                 <div id="address-box">
-                    <a href="#"><img src="<?= InfoPublic::getImage($info->image_header) ?>"
+                    <a href="#"><img id="fix-logo-footer" src="<?= InfoPublic::getImage($info->image_header) ?>"
                                      alt="<?= Yii::$app->name ?>"/></a>
-                    <div id="address-list">
-                        <div class="tit-name">Địa chỉ:</div>
-                        <div class="tit-contain"><?= $info->address ?>.</div>
-                        <div class="tit-name">Phone:</div>
-                        <div class="tit-contain"><?= $info->phone ?></div>
-                        <div class="tit-name">Email:</div>
-                        <div class="tit-contain"><?= $info->email ?></div>
-                    </div>
+
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="introduce-title"><?= Yii::$app->name ?></div>
-                        <ul id="introduce-company" class="introduce-list">
-                            <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
-                            <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
-                            <li>
-                                <?php if (Yii::$app->user->isGuest) { ?>
-                                    <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)">Thông tin
-                                        tài khoản</a>
-                                <?php } else { ?>
-                                    <a href="<?= Url::to(['subscriber/info']) ?>">Thông
-                                        tin <?= Yii::$app->user->identity->username ?></a>
-                                <?php } ?>
-                            </li>
-                            <li>
-                                <?php if (Yii::$app->user->isGuest) { ?>
-                                    <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)">Thông
-                                        tin</a>
-                                <?php } else { ?>
-                                    <a href="<?= Url::to(['subscriber/info']) ?>">Đơn hàng</a>
-                                <?php } ?>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="introduce-title">Truy cập nhanh</div>
-                        <ul id="introduce-Account" class="introduce-list">
-
-                        </ul>
-                    </div>
+            <div class="col-md-3">
+                <div class="introduce-title"><?= Yii::$app->name ?></div>
+                <div id="address-list">
+                    <div class="tit-name">Địa chỉ:</div>
+                    <div class="tit-contain"><?= $info->address ?>.</div>
+                    <div class="tit-name">Phone:</div>
+                    <div class="tit-contain"><?= $info->phone ?></div>
+                    <div class="tit-name">Email:</div>
+                    <div class="tit-contain"><?= $info->email ?></div>
                 </div>
+            </div>
+            <div class="col-md-3">
+                <div class="introduce-title">Truy cập nhanh</div>
+                <ul id="introduce-company" class="introduce-list">
+                    <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
+                    <li><a href="<?= Url::to(['news/projects']) ?>">Dự án</a></li>
+                    <li><a href="<?= Url::to(['news/index']) ?>">Tin nội bộ</a></li>
+                    <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
+                </ul>
             </div>
             <div class="col-md-3">
                 <div id="contact-box">
@@ -80,5 +59,7 @@ use yii\helpers\Url;
         </div><!-- /#footer-menu-box -->
     </div>
 </footer>
-
+<a href="tel:<?= $info->phone?$info->phone:'' ?>" class="call_phone">
+    <img src="<?= Url::base() ?>/admin/img/to2.gif" alt="Phone">
+</a>
 <a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>

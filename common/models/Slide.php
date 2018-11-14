@@ -234,7 +234,7 @@ class Slide extends \yii\db\ActiveRecord
     public function getSlideImage(){
         $image_default = 'category-slide.jpg';
         $model = News::findOne($this->content_id);
-        $link = Url::to('@web/admin/staticdata/content_images/'. $model->image_banner, true);
+        $link = Url::to('@web/admin/staticdata/image_news/'. $model->image_banner, true);
         return $link;
 //        if(file_exists($link)){
 //            return $link;

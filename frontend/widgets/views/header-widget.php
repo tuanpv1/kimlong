@@ -18,7 +18,7 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-xs-12 col-sm-3 logo">
                 <a href="<?= Url::home() ?>">
-                    <img style="height:64px;width:auto" alt="<?= Yii::$app->name ?>"
+                    <img id="fix-logo-header" alt="<?= Yii::$app->name ?>"
                          src="<?= \common\models\InfoPublic::getImage($info->image_header) ?>"/></a>
             </div>
             <?= \frontend\widgets\SearchCategory::widget() ?>
@@ -30,14 +30,6 @@ use yii\helpers\Url;
         <?= MenuTop::widget() ?>
         <!-- userinfo on top-->
         <div id="form-search-opntop">
-        </div>
-        <!-- userinfo on top-->
-        <div id="user-info-opntop">
-        </div>
-        <!-- CART ICON ON MMENU -->
-        <div id="shopping-cart-box-ontop">
-            <i class="fa fa-shopping-cart"></i>
-            <div class="shopping-cart-box-ontop-content"></div>
         </div>
     </div>
 </div>

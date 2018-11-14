@@ -25,7 +25,7 @@ class LatestDeals extends Widget
     {
         $contents = News::find()
             ->andWhere(['status' => News::STATUS_ACTIVE])
-            ->andWhere(['<>', 'hot', News::IS_HOT])
+            ->andWhere(['type' => News::TYPE_NEWS])
             ->orderBy(['updated_at' => SORT_DESC])
             ->limit(6)
             ->all();

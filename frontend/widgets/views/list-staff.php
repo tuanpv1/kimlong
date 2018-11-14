@@ -28,14 +28,20 @@ use yii\helpers\Url;
                             ?>
                             <li>
                                 <div class="post-thumb image-hover2">
-                                    <a href="<?= Url::to(['news/detail', 'id' => $staff->id]) ?>">
-                                        <img src="<?= $staff->getImageDisplayLink() ?>" alt="<?= $staff->display_name ?>">
+                                    <a href="#">
+                                        <img src="<?= $staff->getImageDisplayLink() ?>"
+                                             alt="<?= $staff->display_name ?>">
                                     </a>
                                 </div>
-                                <div class="post-desc">
+                                <div class="post-desc text-center">
                                     <h5 class="post-title">
-                                        <a href="<?= Url::to(['news/detail', 'id' => $staff->id]) ?>"><?= $staff->display_name ?></a>
+                                        <a href="#"><?= $staff->display_name ?> - <?= $staff->phone ?></a>
                                     </h5>
+                                </div>
+                                <div class="text-center">
+                                    <span class="price product-price">
+                                         <?= $staff->short_description ?>
+                                    </span>
                                 </div>
                                 <div class="product-star text-center">
                                     <i class="fa fa-star"></i>

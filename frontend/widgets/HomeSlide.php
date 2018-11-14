@@ -25,7 +25,6 @@ class HomeSlide extends Widget{
     {
         $slide = Slide::find()
             ->andWhere(['status' => Slide::STATUS_ACTIVE])
-            ->andWhere(['type'=> Slide::SLIDE_HOME])
             ->all();
         return $this->render('home-slide',[
             'slide'=>$slide

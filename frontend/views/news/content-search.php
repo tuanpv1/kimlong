@@ -47,7 +47,7 @@ use yii\helpers\Url;
                             <?php foreach ($banner as $item) {
                                 /** @var \common\models\Slide $item */ ?>
                                 <li>
-                                    <img style="height:288px;" src="<?= $item->getSlideImage() ?>"
+                                    <img style="height:140px;" src="<?= $item->getSlideImage() ?>"
                                          alt="<?= $item->id ?>">
                                 </li>
                             <?php } ?>
@@ -88,7 +88,7 @@ use yii\helpers\Url;
                                     <li class="col-sx-12 col-sm-4">
                                         <div class="left-block">
                                             <a href="<?= Url::to(['content/detail', 'id' => $item->id]) ?>">
-                                                <img style="height: 366px"
+                                                <img style="height: 150px"
                                                      class="img-responsive product_image_<?= $item->id ?>"
                                                      alt="product"
                                                      src="<?= $item->getImageDisplayLink('p35.jpg') ?>"/>
@@ -99,11 +99,17 @@ use yii\helpers\Url;
                                             </div>
                                         </div>
                                         <div class="right-block">
-                                            <h5 class="product-name">
+                                            <h5 class="product-name text-center">
                                                 <a href="<?= Url::to(['content/detail', 'id' => $item->id]) ?>">
+                                                    <?php if($item['type'] == \common\models\News::TYPE_PRODUCT){
+                                                        echo "Dự án: ";
+                                                    }else{
+                                                        echo "Tin dự án: ";
+                                                    } ?>
                                                     <span id="product_name_<?= $item['id'] ?>"><?= CUtils::substr($item->display_name, 25) ?></span>
                                                 </a>
                                             </h5>
+                                            <p> <?= CUtils::substr($item['short_description'], 90)?> </p>
                                         </div>
                                     </li>
                                 <?php } ?>

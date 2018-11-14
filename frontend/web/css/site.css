@@ -158,7 +158,60 @@ a.desc:after {
     color: #FF6600;
 }
 
+.call_phone{
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    font-size: 0;
+    z-index: 9999;
+    right: 40px;
+    bottom: 30%;
+}
+
+#fix-introduce-logo{
+    text-align: right;
+}
+
+@media (min-width: 768px) {
+    #fix-phone-menu{
+        margin-right: 0px;
+    }
+
+    #fix-logo-footer {
+        height: 121px;
+        margin-left: 50px;
+    }
+
+    #fix-logo-header {
+        height: 70px;
+        width: auto;
+        padding-left: 100px;
+    }
+}
+
+
 @media (max-width: 480px) {
+    .entry-title{
+        padding-top: 10px;
+    }
+
+    #fix-logo-header{
+        height: 60px;
+    }
+
+    #fix-introduce-logo{
+        text-align: center;
+        height: 210px;
+    }
+
+    #address-box{
+        text-align: center;
+    }
+
+    #fix-logo-footer{
+        height: 150px;
+    }
+
     .top-header a {
         padding-right: 4px;
         margin-left: 4px;

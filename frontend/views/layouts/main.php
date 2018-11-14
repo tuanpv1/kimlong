@@ -58,6 +58,7 @@ $this->registerJs($js, View::POS_END);
 <?= FooterWidget::widget() ?>
 
 <?php $this->endBody() ?>
+<script lang="javascript">var _vc_data = {id : 6303816, secret : 'c8f19ce55ac5e08e09315c0c3c612295'};(function() {var ga = document.createElement('script');ga.type = 'text/javascript';ga.async=true; ga.defer=true;ga.src = '//live.vnpgroup.net/client/tracking.js?id=6303816';var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script>
 </body>
 </html>
 <?php $this->endPage() ?>

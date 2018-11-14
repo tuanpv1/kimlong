@@ -8,7 +8,7 @@
 use common\models\Category;
 use common\models\News;
 use yii\helpers\Url;
-
+/** @var \common\models\InfoPublic $info */
 ?>
 <div class="container">
     <div class="row">
@@ -30,6 +30,8 @@ use yii\helpers\Url;
                         <li><a href="<?= Url::to(['news/index']) ?>">Tin nội bộ</a></li>
                         <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
                         <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
+
+                        <li id="fix-phone-menu"><a href="tel:<?= $info->phone ?>">Hotline: <?= $info->phone ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

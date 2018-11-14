@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\News;
 use common\models\Slide;
 use yii\data\Pagination;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -77,12 +78,12 @@ class NewsController extends Controller
         if (!$new) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        // Lấy tin tức liên quan
+
         $relatedNews = News::find()
             ->andWhere(['status' => News::STATUS_ACTIVE])
             ->andWhere(['type' => News::TYPE_PRODUCT])
             ->andWhere(['<>', 'id', $id])
-            ->orderBy(['updated_at' => SORT_DESC])
+            ->orderBy(new Expression('rand()'))
             ->limit(6)
             ->all();
         return $this->render('project-detail', [
@@ -96,7 +97,7 @@ class NewsController extends Controller
         if (!empty($_POST['keyword'])) {
             $newsQuery = News::find()
                 ->andWhere(['status' => News::STATUS_ACTIVE])
-                ->andWhere(['type' => News::TYPE_PRODUCT])
+                ->andWhere(['IN', 'type', [News::TYPE_PRODUCT, News::TYPE_NEWS]])
                 ->andWhere(['like', 'display_name', $_POST['keyword']])
                 ->orderBy(['updated_at' => SORT_DESC]);
             $countQuery = clone $newsQuery;

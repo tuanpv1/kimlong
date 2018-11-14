@@ -17,6 +17,8 @@ use yii\web\UploadedFile;
  */
 class NewsController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     /**
      * @inheritdoc
      */
@@ -76,7 +78,7 @@ class NewsController extends Controller
             return $this->render('view-staff', ['model' => $model]);
         }
 
-        if($model->type == News::TYPE_PRODUCT){
+        if ($model->type == News::TYPE_PRODUCT) {
             return $this->render('view-project', ['model' => $model]);
         }
 
@@ -103,6 +105,7 @@ class NewsController extends Controller
             if ($image_display) {
                 $file_name = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_display->extension;
                 $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp = str_replace('/backend/web','/admin',$tmp);
                 if ($image_display->saveAs($tmp . $file_name)) {
                     $model->image_display = $file_name;
                 }
@@ -111,7 +114,8 @@ class NewsController extends Controller
             $image_banner = UploadedFile::getInstance($model, 'image_banner');
             if ($image_banner) {
                 $file_name = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_display->extension;
-                $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp =Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp = str_replace('/backend/web','/admin',$tmp);
                 if ($image_banner->saveAs($tmp . $file_name)) {
                     $model->image_banner = $file_name;
                 }
@@ -159,7 +163,8 @@ class NewsController extends Controller
             $image_display = UploadedFile::getInstance($model, 'image_display');
             if ($image_display) {
                 $file_name = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_display->extension;
-                $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp =Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp = str_replace('/backend/web','/admin',$tmp);
                 if ($image_display->saveAs($tmp . $file_name)) {
                     $model->image_display = $file_name;
                 }
@@ -170,7 +175,8 @@ class NewsController extends Controller
             $image_banner = UploadedFile::getInstance($model, 'image_banner');
             if ($image_banner) {
                 $file_name_banner = Yii::$app->user->id . '.' . uniqid() . time() . '.' . $image_banner->extension;
-                $tmp = Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp =Yii::getAlias('@backend') . '/web/' . Yii::getAlias('@image_news') . '/';
+                $tmp = str_replace('/backend/web','/admin',$tmp);
                 if ($image_banner->saveAs($tmp . $file_name_banner)) {
                     $model->image_banner = $file_name_banner;
                 }

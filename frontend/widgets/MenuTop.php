@@ -8,9 +8,8 @@
 
 namespace frontend\widgets;
 
-use common\models\Category;
+use common\models\InfoPublic;
 use yii\base\Widget;
-use yii\helpers\Url;
 
 class MenuTop extends Widget
 {
@@ -24,6 +23,7 @@ class MenuTop extends Widget
 
     public function run()
     {
-        return $this->render('menu-top');
+        $info = InfoPublic::findOne(InfoPublic::ID_DEFAULT);
+        return $this->render('menu-top', ['info' => $info]);
     }
 }

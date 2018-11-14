@@ -60,15 +60,14 @@ class SlideController extends Controller
      * Lists all Slide models.
      * @return mixed
      */
-    public function actionIndex($type = Slide::SLIDE_HOME)
+    public function actionIndex()
     {
         $searchModel = new SlideSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $type);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'type' => $type
         ]);
     }
 
@@ -122,7 +121,6 @@ class SlideController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $type = $model->type;
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
@@ -139,7 +137,6 @@ class SlideController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'type' => $type
             ]);
         }
     }

@@ -39,9 +39,9 @@ class SlideSearch extends Slide
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$type)
+    public function search($params)
     {
-        $query = Slide::find()->andWhere(['type'=>$type]);
+        $query = Slide::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

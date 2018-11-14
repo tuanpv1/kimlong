@@ -71,7 +71,7 @@ use yii\helpers\Url;
                                                     <span class="author"><i class="fa fa-user"></i> by: <a
                                                             href="#"><?= $new->getUserCreated() ?></a></span>
                                                     <span class="cat"><i class="fa fa-folder-o"></i> <a
-                                                            href="<?= Url::to(['news/index']) ?>">Dự án</a></span>
+                                                            href="<?= Url::to(['news/projects']) ?>">Dự án</a></span>
                                                     <span class="date">
                                                         <i class="fa fa-calendar"></i> <?= date('d/m/Y H:i:s', $new->created_at) ?>
                                                     </span>
