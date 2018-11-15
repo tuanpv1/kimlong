@@ -17,22 +17,6 @@ ToastAssetFe::register($this);
 ToastAssetFe::config($this, [
     'positionClass' => ToastAssetFe::POSITION_TOP_LEFT
 ]);
-$time = InfoPublic::findOne(InfoPublic::ID_DEFAULT)->time_show_order * 60000;
-$orderUrl = Url::to(['shopping-cart/get-order']);
-$js = <<<JS
-    setInterval(
-        function(){
-            jQuery.post(
-                '{$orderUrl}'
-                )
-                .done(function(result) {
-                     toastr.info(result);
-                })
-        }, {$time}
-    );
-    
-JS;
-$this->registerJs($js, View::POS_END);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -7,8 +7,7 @@
  */
 namespace frontend\widgets;
 
-use frontend\models\LoginForm;
-use frontend\models\SignupForm;
+use common\models\Customer;
 use yii\base\Widget;
 use Yii;
 
@@ -23,11 +22,9 @@ class FormLogin extends Widget{
 
     public  function run()
     {
-        $model_register = new SignupForm();
-        $model = new LoginForm();
+        $model = new Customer();
         return $this->render('form-login',[
             'model' => $model,
-            'model_register' => $model_register,
         ]);
     }
 }

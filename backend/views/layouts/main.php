@@ -30,6 +30,7 @@ $tilte = Yii::t('app',"Shop - Trang quản trị");
 <div class="page-header">
 <?php
 NavBar::begin([
+    'brandLabel' => '<div style="padding: 20px 0 20px 50px; font-size: larger"><i class="glyphicon glyphicon-home"></i> Trang chủ</div>',
     'brandUrl' => Yii::$app->homeUrl,
     'brandOptions' => [
         'class' => 'page-logo'
@@ -158,6 +159,12 @@ $menuItems = [
                 'require_auth' => true,
             ],
         ]
+    ],
+    [
+        'encode' => false,
+        'label' => '<i class="fa fa-server"></i> '.Yii::t('app','Khách hàng'),
+        'url' => ['customer/index'],
+        'require_auth' => true,
     ],
     [
         'label' => Yii::t('app','Hệ thống'),

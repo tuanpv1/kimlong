@@ -13,7 +13,7 @@ use yii\helpers\Url;
 <div class="container">
     <div class="row">
     </div>
-    <div id="main-menu" class="col-sm-9 main-menu">
+    <div id="main-menu" class="col-sm-8 main-menu">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -30,11 +30,12 @@ use yii\helpers\Url;
                         <li><a href="<?= Url::to(['news/index']) ?>">Tin nội bộ</a></li>
                         <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
                         <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
-
-                        <li id="fix-phone-menu"><a href="tel:<?= $info->phone ?>">Hotline: <?= $info->phone ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
+    </div>
+    <div id="fix-phone-menu">
+        <a href="tel:<?= $info->phone?$info->phone:'' ?>"><i class="glyphicon glyphicon-phone"></i> <?= $info->phone ?></a>
     </div>
 </div>

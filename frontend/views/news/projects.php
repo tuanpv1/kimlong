@@ -8,7 +8,6 @@
 use common\helpers\CUtils;
 use common\models\News;
 use yii\helpers\Url;
-
 ?>
 <div class="columns-container">
     <div class="container" id="columns">

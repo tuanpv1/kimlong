@@ -33,15 +33,3 @@ use yii\helpers\Url;
         </div>
     </div>
 </div>
-
-<!-- Start Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="box-authentication tp_001">
-                <?= FormLogin::widget() ?>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->

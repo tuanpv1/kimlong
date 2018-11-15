@@ -139,6 +139,13 @@ a.desc:after {
     width: 400px;
 }
 
+.modal-header{
+    border-bottom:0;
+}
+.modal-content{
+    border-radius:0;
+}
+
 #my-chart.loading {
     background: url(../images/Preloader_8.gif) center no-repeat #fff;
     position: fixed;
@@ -172,9 +179,15 @@ a.desc:after {
     text-align: right;
 }
 
+#fix-phone-menu a{
+    color: white;
+}
+
 @media (min-width: 768px) {
     #fix-phone-menu{
-        margin-right: 0px;
+        margin-top: 17px;
+        margin-right: 65px;
+        text-align: right;
     }
 
     #fix-logo-footer {
@@ -191,6 +204,11 @@ a.desc:after {
 
 
 @media (max-width: 480px) {
+
+    #fix-phone-menu{
+        display: none;
+    }
+
     .entry-title{
         padding-top: 10px;
     }
