@@ -95,8 +95,7 @@ $this->registerJs($js_toastr, View::POS_READY);
                             <?= $new->map ?>
                         </div>
                     <?php } else { ?>
-                        <div class="content-text text-center">
-
+                        <div class="text-center">
                             <?php if ($new->map) {
                                 echo $new->map;
                             } else if ($new->video) { ?>

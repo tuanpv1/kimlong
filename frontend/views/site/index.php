@@ -19,5 +19,4 @@ use yii\web\View;
 <?= LatestDeals::widget() ?>
 
 
-<?php
-//\frontend\widgets\ListNews::widget() ?>
+<?= \frontend\widgets\ListNews::widget() ?>

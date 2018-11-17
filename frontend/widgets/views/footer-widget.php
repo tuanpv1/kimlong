@@ -32,7 +32,7 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::to(['site/about']) ?>">Giới thiệu</a></li>
                     <li><a href="<?= Url::to(['news/projects']) ?>">Dự án</a></li>
                     <li><a href="<?= Url::to(['news/index']) ?>">Tin nội bộ</a></li>
-                    <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ</a></li>
+                    <li><a href="<?= Url::to(['site/contact']) ?>">Liên hệ <?= $info->phone ?></a></li>
                 </ul>
             </div>
             <div class="col-md-3">

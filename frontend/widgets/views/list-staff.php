@@ -19,7 +19,7 @@ use yii\helpers\Url;
             </h2>
             <div class="blog-list-wapper">
                 <ul class="owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="30"
-                    data-autoplayTimeout="1000" data-autoplayHoverPause="true"
+                    data-autoplayTimeout="500" data-autoplayHoverPause="true"
                     data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
                     <?php
                     if ($staffs) {
@@ -27,12 +27,6 @@ use yii\helpers\Url;
                         foreach ($staffs as $staff) {
                             ?>
                             <li>
-                                <div class="post-thumb image-hover2">
-                                    <a href="#">
-                                        <img src="<?= $staff->getImageDisplayLink() ?>"
-                                             alt="<?= $staff->display_name ?>">
-                                    </a>
-                                </div>
                                 <div class="post-desc text-center">
                                     <h5 class="post-title">
                                         <a href="#"><?= $staff->display_name ?> - <?= $staff->phone ?></a>
