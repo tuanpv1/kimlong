@@ -75,7 +75,7 @@ class News extends \yii\db\ActiveRecord
                 'extensions' => 'png, jpg, jpeg, gif',
                 'maxSize' => 1024 * 1024 * 10
             ],
-            [['map','string','phone'],'string']
+            [['map','string','phone','video'],'string']
         ];
     }
 

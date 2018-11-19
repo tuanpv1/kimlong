@@ -86,16 +86,18 @@ $this->registerJs($js_toastr, View::POS_READY);
                         <?= $new->short_description ?>
                     </div>
                     <?php if ($new->map && $new->video) { ?>
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <iframe width="560" height="315" src="<?= $new->video ?>" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                        </div>
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <?= $new->map ?>
+                        <div class="row content-text">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <iframe width="400" height="300" src="https://www.youtube.com/embed/<?= explode('?v=',$new->video)[1] ?>" frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <?= $new->map ?>
+                            </div>
                         </div>
                     <?php } else { ?>
-                        <div class="text-center">
+                        <div class="content-text text-center">
                             <?php if ($new->map) {
                                 echo $new->map;
                             } else if ($new->video) { ?>
